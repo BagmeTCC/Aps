@@ -1,11 +1,12 @@
-﻿using Newtonsoft.Json;
+﻿using ApsHgBrasilWeather.Models.RestModels;
+using ApsHgBrasilWeather.Models.Services;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
-using System.Web;
 
 namespace ApsHgBrasilWeather.Models.Helpers
 {
@@ -13,20 +14,25 @@ namespace ApsHgBrasilWeather.Models.Helpers
     {
         private static HttpClient client = new HttpClient();
 
-        public static async Task<HttpResponseMessage> GetPrevisaoTempoAtual(string parametros)
+        public static async Task<PrevisaoTempoAtual> GetPrevisaoTempoAtual(string parametros)
         {
+            RestModel<PrevisaoTempoAtual> retorno = new RestModel<PrevisaoTempoAtual>();
+            PrevisaoTempoAtualService service = new PrevisaoTempoAtualService();
+
             HttpResponseMessage response = await client.GetAsync(ConfigHelper.UrlWeather);
-            RetornoRestModel<PrevisaoTempoAtual> retorno = new RetornoRestModel<PrevisaoTempoAtual>();
-
-            using (var a = await response.Content.ReadAsStreamAsync())
+            
+            using (var responseStream = await response.Content.ReadAsStreamAsync())
             {
-                string batata = new StreamReader(a).ReadToEnd();
+                string stringJson = new StreamReader(responseStream).ReadToEnd();
+                retorno = JsonConvert.DeserializeObject<RestModel<PrevisaoTempoAtual>>(stringJson);
 
-                retorno = JsonConvert.DeserializeObject<RetornoRestModel<PrevisaoTempoAtual>>(batata);
+                if (retorno != null && retorno.Resultado != null)
+                {
+                    service.FormatarDados(retorno.Resultado);
+                }
             }
             
-  
-            return response;
+            return retorno.Resultado;
         }
     }
 }
