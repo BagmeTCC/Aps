@@ -8,5 +8,6 @@ namespace ApsHgBrasilWeather.Models.RestModels.IBGE
     public class RestModelIBGE<T>
     {
         public List<T> Resultado { get; set; }
+        public bool Successo { get; set; }
     }
 }

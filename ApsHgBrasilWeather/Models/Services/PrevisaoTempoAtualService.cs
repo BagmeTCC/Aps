@@ -79,7 +79,7 @@ namespace ApsHgBrasilWeather.Models.Services
                     break;
 
                 case "none_night":
-                    desc = "erro ao obter mas está de noite";
+                    desc = "Erro ao obter mas está de noite";
                     break;
             }
 

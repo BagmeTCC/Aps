@@ -132,6 +132,7 @@
     <Compile Include="Models\RestModels\IBGE\Municipio.cs" />
     <Compile Include="Models\RestModels\IBGE\RestModelIBGE.cs" />
     <Compile Include="Models\Services\PrevisaoTempoAtualService.cs" />
+    <Compile Include="Models\ViewModels\PrevisaoTempoViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -141,8 +142,8 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
-    <Content Include="CustomCss\register.css" />
-    <Content Include="CustomScripts\register.js" />
+    <Content Include="CustomCss\PrevisaoTempo.css" />
+    <Content Include="CustomScripts\PrevisaoTempo.js" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />

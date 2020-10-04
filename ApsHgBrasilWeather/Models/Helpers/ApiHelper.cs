@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 
@@ -31,13 +32,14 @@ namespace ApsHgBrasilWeather.Models.Helpers
                 if (retorno != null && retorno.Resultado != null)
                 {
                     service.FormatarDados(retorno.Resultado);
+                    retorno.Successo = true;
                 }
             }
             
             return retorno.Resultado;
         }
 
-        public static async Task GetMunicipios(string uf)
+        public static async Task<RestModelIBGE<Municipio>> GetMunicipios(string uf)
         {
             RestModelIBGE<Municipio> retorno = new RestModelIBGE<Municipio>();
 
@@ -48,6 +50,12 @@ namespace ApsHgBrasilWeather.Models.Helpers
             {
                 string stringJson = new StreamReader(responseStream).ReadToEnd();
                 retorno.Resultado = JsonConvert.DeserializeObject<List<Municipio>>(stringJson);
+
+                if (retorno.Resultado != null && response.StatusCode == HttpStatusCode.OK)
+                {
+                    retorno.Successo = true;
+                }
+                return retorno;
             }
         }
     }
