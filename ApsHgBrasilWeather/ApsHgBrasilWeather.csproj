@@ -126,9 +126,11 @@
     </Compile>
     <Compile Include="Models\Helpers\ApiHelper.cs" />
     <Compile Include="Models\Helpers\ConfigHelper.cs" />
-    <Compile Include="Models\RestModels\PrevisaoTempoAtual.cs" />
-    <Compile Include="Models\RestModels\PrevisaoTempoSeguinte.cs" />
-    <Compile Include="Models\RestModels\RestModel.cs" />
+    <Compile Include="Models\RestModels\HgBrasil\PrevisaoTempoAtual.cs" />
+    <Compile Include="Models\RestModels\HgBrasil\PrevisaoTempoSeguinte.cs" />
+    <Compile Include="Models\RestModels\HgBrasil\RestModelHgBrasil.cs" />
+    <Compile Include="Models\RestModels\IBGE\Municipio.cs" />
+    <Compile Include="Models\RestModels\IBGE\RestModelIBGE.cs" />
     <Compile Include="Models\Services\PrevisaoTempoAtualService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -137,12 +139,23 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\font-awesome.css" />
+    <Content Include="Content\font-awesome.min.css" />
+    <Content Include="CustomCss\register.css" />
+    <Content Include="CustomScripts\register.js" />
     <Content Include="favicon.ico" />
+    <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\loading.gif" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="fonts\FontAwesome.otf" />
+    <Content Include="fonts\fontawesome-webfont.woff2" />
+    <Content Include="fonts\fontawesome-webfont.woff" />
+    <Content Include="fonts\fontawesome-webfont.ttf" />
+    <Content Include="fonts\fontawesome-webfont.eot" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />

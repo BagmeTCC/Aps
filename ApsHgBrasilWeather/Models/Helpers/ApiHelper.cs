@@ -1,4 +1,6 @@
 ﻿using ApsHgBrasilWeather.Models.RestModels;
+using ApsHgBrasilWeather.Models.RestModels.HgBrasil;
+using ApsHgBrasilWeather.Models.RestModels.IBGE;
 using ApsHgBrasilWeather.Models.Services;
 using Newtonsoft.Json;
 using System;
@@ -16,7 +18,7 @@ namespace ApsHgBrasilWeather.Models.Helpers
 
         public static async Task<PrevisaoTempoAtual> GetPrevisaoTempoAtual(string parametros)
         {
-            RestModel<PrevisaoTempoAtual> retorno = new RestModel<PrevisaoTempoAtual>();
+            RestModelHgBrasil<PrevisaoTempoAtual> retorno = new RestModelHgBrasil<PrevisaoTempoAtual>();
             PrevisaoTempoAtualService service = new PrevisaoTempoAtualService();
 
             HttpResponseMessage response = await client.GetAsync(ConfigHelper.UrlWeather);
@@ -24,7 +26,7 @@ namespace ApsHgBrasilWeather.Models.Helpers
             using (var responseStream = await response.Content.ReadAsStreamAsync())
             {
                 string stringJson = new StreamReader(responseStream).ReadToEnd();
-                retorno = JsonConvert.DeserializeObject<RestModel<PrevisaoTempoAtual>>(stringJson);
+                retorno = JsonConvert.DeserializeObject<RestModelHgBrasil<PrevisaoTempoAtual>>(stringJson);
 
                 if (retorno != null && retorno.Resultado != null)
                 {
@@ -33,6 +35,20 @@ namespace ApsHgBrasilWeather.Models.Helpers
             }
             
             return retorno.Resultado;
+        }
+
+        public static async Task GetMunicipios(string uf)
+        {
+            RestModelIBGE<Municipio> retorno = new RestModelIBGE<Municipio>();
+
+            string urlFormatada = ConfigHelper.UrlIBGE.Replace("{UF}", uf);
+            HttpResponseMessage response = await client.GetAsync(urlFormatada);
+
+            using (var responseStream = await response.Content.ReadAsStreamAsync())
+            {
+                string stringJson = new StreamReader(responseStream).ReadToEnd();
+                retorno.Resultado = JsonConvert.DeserializeObject<List<Municipio>>(stringJson);
+            }
         }
     }
 }

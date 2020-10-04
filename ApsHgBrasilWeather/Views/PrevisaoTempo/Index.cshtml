@@ -1,7 +1,36 @@
-﻿
-@{
-    ViewBag.Title = "Index";
+﻿@model ApsHgBrasilWeather.Models.RestModels.PrevisaoTempoAtual
+
+@using (Html.BeginForm("Index", "PrevisaoTempo", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div id="loading">
+        <div>
+            <img src="~/Images/loading.gif" />
+        </div>
+    </div>
+
+    <div class="form-horizontal">
+        <h2>Cadastre-se</h2>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Cidade, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.Cidade, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Cidade, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-md-4">
+                <i class="fa fa-search fa-2x btnPesquisar" onclick="Pesquisar('@Url.Action("GetPrevisaoTempo", "PrevisaoTempo")')"></i>
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.CondicaoTempoAtual, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.CondicaoTempoAtual, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.CondicaoTempoAtual, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+
 }
-
-<h2>Index</h2>
-

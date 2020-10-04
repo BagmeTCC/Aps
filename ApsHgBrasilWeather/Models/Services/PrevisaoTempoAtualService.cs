@@ -1,4 +1,5 @@
 ﻿using ApsHgBrasilWeather.Models.RestModels;
+using ApsHgBrasilWeather.Models.RestModels.HgBrasil;
 using System;
 using System.Globalization;
 

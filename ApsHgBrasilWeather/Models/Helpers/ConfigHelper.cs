@@ -13,6 +13,11 @@ namespace ApsHgBrasilWeather.Models.Helpers
             get { return ConfigurationManager.AppSettings["urlWeather"]; }
         }
 
+        public static string UrlIBGE
+        {
+            get { return ConfigurationManager.AppSettings["urlIBGE"]; }
+        }
+
         public static string Chave1
         {
             get { return ConfigurationManager.AppSettings["chave1"]; }

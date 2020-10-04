@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System.Collections.Generic;
 
-namespace ApsHgBrasilWeather.Models.RestModels
+namespace ApsHgBrasilWeather.Models.RestModels.HgBrasil
 {
     public class PrevisaoTempoAtual
     {
