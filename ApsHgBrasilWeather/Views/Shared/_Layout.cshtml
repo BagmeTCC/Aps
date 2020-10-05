@@ -7,15 +7,20 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     <link href="~/Content/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-theme.min.css" rel="stylesheet" />
     <link href="~/CustomCss/PrevisaoTempo.css" rel="stylesheet" />
     @RenderSection("style", required: false)
 
 </head>
 <body>
 
+    <div id="loading">
+        <div>
+            <img src="~/Images/loading.gif" />
+        </div>
+    </div>
     <div class="container body-content">
         @RenderBody()
-        <hr />
     </div>
 
 

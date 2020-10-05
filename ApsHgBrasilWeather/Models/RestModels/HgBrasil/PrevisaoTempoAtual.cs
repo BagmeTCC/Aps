@@ -38,13 +38,7 @@ namespace ApsHgBrasilWeather.Models.RestModels.HgBrasil
         [JsonProperty(PropertyName = "City_name")]
         public string Cidade { get; set; }
 
-        public string Uf
-        {
-            get
-            {
-                return CidadeUf.Split(',')[1].Trim();
-            }
-        }
+        public string Uf { get; set; }
 
         [JsonProperty(PropertyName = "Forecast")]
         public List<PrevisaoTempoSeguinte> ListaPrevisaoTempoOutrosDias { get; set; }

@@ -7,6 +7,11 @@ namespace ApsHgBrasilWeather.Models.RestModels.HgBrasil
         [JsonProperty(PropertyName = "Results")]
         public T Resultado { get; set; }
 
-        public bool Successo { get; set; }
+        [JsonProperty(PropertyName = "Error")]
+        public bool Sucesso { get; set; }
+
+        [JsonProperty(PropertyName = "Message")]
+        public string Mensagem { get; set; }
+
     }
 }

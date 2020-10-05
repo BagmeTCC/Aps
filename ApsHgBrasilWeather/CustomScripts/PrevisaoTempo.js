@@ -10,47 +10,46 @@ function Pesquisar(urlAction) {
 
     if (estadoEscolhido === '') {
         alert('Selecione um estado antes de prosseguir.');
-    } else {
-        if (municipioEscolhido === '') {
-            alert('Selecione um munícipio antes de prosseguir.');
-        }
     }
+    else if (municipioEscolhido === '') {
+        alert('Selecione um munícipio antes de prosseguir.');
 
-    $.ajax({
-        url: urlAction,
-        data: { cnpjDigitado },
-        type: "GET",
-        async: true,
+    } else {
+        $.ajax({
+            url: urlAction,
+            data: { estadoEscolhido, municipioEscolhido },
+            type: "GET",
+            async: true,
 
-        beforeSend: function () {
-            showLoadingSpinner();
-        },
+            beforeSend: function () {
+                showLoadingSpinner();
+            },
 
-        success: function (retorno) {
+            success: function (retorno) {
 
-            if (retorno.OK) {
+                if (retorno.OK) {
 
-                PopulateSomeFields(retorno.Info);
+                    PopulateFields(retorno.PrevisaoTempoAtual);
 
-                hideLoadingSpinner();
+                    hideLoadingSpinner();
 
-            } else {
+                } else {
 
-                alert('Oops! O CNPJ digitado é inválido. Tente novamente.');
-                $('#Cliente_Cnpj').val("");
+                    alert(retorno.Mensagem);
+
+                    hideLoadingSpinner();
+                }
+            },
+
+            error: function (retorno) {
+                alert('Ocorreu um erro ao pesquisar o tempo do município escolhido. ' +
+                    'Tente mais uma vez e se o erro persistir contate o administrador.' +
+                    retorno);
 
                 hideLoadingSpinner();
             }
-        },
-
-        error: function (retorno) {
-            alert('Ocorreu um erro ao pesquisar o CNPJ na Receita Federal.' +
-                'Tente mais uma vez e se o erro persistir, digite os dados manualmente.' +
-                retorno);
-
-            hideLoadingSpinner();
-        }
-    });
+        });
+    }
 }
 
 function GetMunicipios(urlAction) {
@@ -77,20 +76,26 @@ function GetMunicipios(urlAction) {
 
             } else {
 
-                alert('Oops! Deu errado.');
-             
+                alert('Oops! Ocorreu um erro ao buscar os municípios do estado selecionado. ' +
+                    'Tente novamente.' +
+                    retorno);
+
                 hideLoadingSpinner();
             }
         },
 
         error: function (retorno) {
-            alert('Ocorreu um erro ao buscar os municípios do estado selecionado. ' +
+            alert('Oops! Ocorreu um erro ao buscar os municípios do estado selecionado. ' +
                 'Tente novamente.' +
                 retorno);
 
             hideLoadingSpinner();
         }
     });
+}
+
+function PopulateFields(previsaoTempoAtual) {
+
 }
 
 function PopulateDropDownMunicipios(municipios) {

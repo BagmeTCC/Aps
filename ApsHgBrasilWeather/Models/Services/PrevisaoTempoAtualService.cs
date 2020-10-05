@@ -1,7 +1,11 @@
-﻿using ApsHgBrasilWeather.Models.RestModels;
+﻿using ApsHgBrasilWeather.Models.Helpers;
+using ApsHgBrasilWeather.Models.RestModels;
 using ApsHgBrasilWeather.Models.RestModels.HgBrasil;
 using System;
+using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
+using System.Text;
 
 namespace ApsHgBrasilWeather.Models.Services
 {
@@ -18,6 +22,7 @@ namespace ApsHgBrasilWeather.Models.Services
             previsaoTempoAtual.CondicaoTempoAtual = GetDescricaoCondicaoTempo(previsaoTempoAtual.CondicaoTempoAtual);
             previsaoTempoAtual.TemperaturaAtual += " °C";
             previsaoTempoAtual.UmidadePercentual += "%"; 
+            previsaoTempoAtual.Uf = previsaoTempoAtual.CidadeUf.Split(',')[1].Trim();
 
             previsaoTempoAtual.ListaPrevisaoTempoOutrosDias?
                 .ForEach(p => 
@@ -26,6 +31,37 @@ namespace ApsHgBrasilWeather.Models.Services
                     p.MinimaTemperatura += " °C";
                     p.MaximaTemperatura += " °C";
                 });
+        }
+
+        public string MontarParametros(string estadoEscolhido, string municipioEscolhido)
+        {
+            StringBuilder parametros = new StringBuilder();
+            List<string> vet = municipioEscolhido.Split(' ').ToList();
+            string valor = ConfigHelper.Chave2;
+
+            parametros.Append($"?key={valor}&city_name=");
+
+            if (vet.Count > 1)
+            {
+                vet.ForEach(s =>
+                {
+                    parametros.Append(s);
+                    parametros.Append("_");
+                });
+
+                parametros.Remove(parametros.Length - 1, 1);
+                parametros.Append(",");
+                parametros.Append(estadoEscolhido);
+            }
+            else
+            {
+                parametros.Append(municipioEscolhido);
+                parametros.Append(",");
+                parametros.Append(estadoEscolhido);
+            }
+
+            return parametros.ToString();
+            
         }
 
         private string GetDescricaoCondicaoTempo(string condicaoTempoAtual)

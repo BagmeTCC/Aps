@@ -1,7 +1,9 @@
 ﻿using ApsHgBrasilWeather.Models.Helpers;
 using ApsHgBrasilWeather.Models.RestModels;
 using ApsHgBrasilWeather.Models.RestModels.HgBrasil;
+using ApsHgBrasilWeather.Models.Services;
 using ApsHgBrasilWeather.Models.ViewModels;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,34 +15,37 @@ namespace ApsHgBrasilWeather.Controllers
 {
     public class PrevisaoTempoController : Controller
     {
-        public async Task<ActionResult> Index()
+        public ActionResult Index()
         {
             PrevisaoTempoViewModel viewModel = new PrevisaoTempoViewModel();
-            //PrevisaoTempoAtual previsao = await ApiHelper.GetPrevisaoTempoAtual("");
-
-             await ApiHelper.GetMunicipios("RJ");
 
             return View(viewModel);
         }
 
-        [HttpPost]
-        public ActionResult Index(string cidade)
+        public async Task<ActionResult> GetPrevisaoTempo(string estadoEscolhido, string municipioEscolhido)
         {
-            return View();
-        }
+            PrevisaoTempoAtualService service = new PrevisaoTempoAtualService();
+            string parametros = service.MontarParametros(estadoEscolhido, municipioEscolhido);
 
-        public ActionResult GetPrevisaoTempo()
-        {
-            return null;
+            var retorno = await ApiHelper.GetPrevisaoTempoAtual(parametros);
+
+            if (retorno.Sucesso)
+            {
+                return Json(new { OK = retorno.Sucesso, PrevisaoTempoAtual = retorno.Resultado }, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return Json(new { OK = false, Mensagem = retorno.Mensagem}, JsonRequestBehavior.AllowGet);
+            }
         }
 
         public async Task<ActionResult> GetMunicipios(string estadoEscolhido)
         {
             var retorno = await ApiHelper.GetMunicipios(estadoEscolhido);
 
-            if (retorno.Successo)
+            if (retorno.Sucesso)
             {
-                return Json(new { OK = retorno.Successo, Municipios = retorno.Resultado.OrderBy(p => p.Nome).ToList() }, JsonRequestBehavior.AllowGet);
+                return Json(new { OK = retorno.Sucesso, Municipios = retorno.Resultado.OrderBy(p => p.Nome).ToList() }, JsonRequestBehavior.AllowGet);
             }
             else
             {

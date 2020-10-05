@@ -69,8 +69,51 @@ select {
     box-shadow: none !important;
 }
 
-
-.form-group {
-    margin-right: 30px !important;
+#accordion {
+    border: 1px solid #d6d6d6;
+    padding: 1.2rem;
+    box-shadow: 2px 2px 7px;
+    margin-top: 5rem;
 }
 
+.panel {
+    border-color: #d6d6d6;
+    margin: 1.2rem;
+}
+
+    .panel .panel-heading {
+        background: #fafafa;
+        border-bottom: 2px solid #ececec;
+        padding-bottom: 9px;
+        padding-left: 20px;
+        padding-right: 20px;
+        padding-top: 11px;
+        position: relative;
+        cursor: pointer;
+    }
+
+    .panel .panel-heading:hover {
+        box-shadow: 2px 2px 2px rgba(0,0,0, 0.3);
+        transition: 2s ease;
+    }
+
+    .panel .panel-dia-semana-content{
+        padding: 1.3rem;
+    }
+
+    @media (max-width: 992px) {
+        select {
+        max-width: 100% !important;
+    }
+
+    .btnPesquisar {
+        margin-left: 50%;
+    }
+
+        #accordion {
+            border: 1px solid #d6d6d6;
+            padding: 1.2rem;
+            box-shadow: 2px 2px 7px;
+            margin-top: 2rem;
+        }
+}

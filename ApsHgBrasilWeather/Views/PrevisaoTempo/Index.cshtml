@@ -4,19 +4,12 @@
 {
     @Html.AntiForgeryToken()
 
-    <div id="loading">
-        <div>
-            <img src="~/Images/loading.gif" />
-        </div>
-    </div>
-
     <div class="form-horizontal">
-        <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
             @Html.LabelFor(model => model.EstadoSelecionado, htmlAttributes: new { @class = "control-label col-md-1 campoObrigatorio" })
             <div class="col-md-4">
-                @Html.DropDownListFor(model => Model.EstadoSelecionado, Model.Estados, new { @id = "ddlEstados", @class = "form-control", @onchange=$"GetMunicipios('{Url.Action("GetMunicipios", "PrevisaoTempo")}')" })
+                @Html.DropDownListFor(model => Model.EstadoSelecionado, Model.Estados, new { @id = "ddlEstados", @class = "form-control", @onchange = $"GetMunicipios('{Url.Action("GetMunicipios", "PrevisaoTempo")}')" })
                 @Html.ValidationMessageFor(model => model.EstadoSelecionado, "", new { @class = "text-danger" })
             </div>
 
@@ -31,7 +24,43 @@
             </div>
         </div>
 
-        <input type="submit" value="Teste" />
+        <div id="accordion">
+            <div class="panel">
+                <div class="panel-heading" data-toggle="collapse" href="#collapseExample1" aria-expanded="false" aria-controls="collapseExample">
+                    <p>Teste1</p>
+                </div>
+
+                <div class="collapse" id="collapseExample1">
+                    <div class="panel-dia-semana-content">
+                        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="panel-heading" data-toggle="collapse" href="#collapseExample2" aria-expanded="false" aria-controls="collapseExample2">
+                    <p>Teste1</p>
+                </div>
+
+                <div class="collapse" id="collapseExample2">
+                    <div class="panel-dia-semana-content">
+                        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="panel-heading" data-toggle="collapse" href="#collapseExample3" aria-expanded="false" aria-controls="collapseExample3">
+                    <p>Teste1</p>
+                </div>
+
+                <div class="collapse" id="collapseExample3">
+                    <div class="panel-dia-semana-content">
+                        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
 }

@@ -17,26 +17,29 @@ namespace ApsHgBrasilWeather.Models.Helpers
     {
         private static HttpClient client = new HttpClient();
 
-        public static async Task<PrevisaoTempoAtual> GetPrevisaoTempoAtual(string parametros)
+        public static async Task<RestModelHgBrasil<PrevisaoTempoAtual>> GetPrevisaoTempoAtual(string parametros)
         {
             RestModelHgBrasil<PrevisaoTempoAtual> retorno = new RestModelHgBrasil<PrevisaoTempoAtual>();
             PrevisaoTempoAtualService service = new PrevisaoTempoAtualService();
 
-            HttpResponseMessage response = await client.GetAsync(ConfigHelper.UrlWeather);
+            string url = ConfigHelper.UrlWeather + parametros;
+
+            HttpResponseMessage response = await client.GetAsync(url);
             
             using (var responseStream = await response.Content.ReadAsStreamAsync())
             {
                 string stringJson = new StreamReader(responseStream).ReadToEnd();
                 retorno = JsonConvert.DeserializeObject<RestModelHgBrasil<PrevisaoTempoAtual>>(stringJson);
 
-                if (retorno != null && retorno.Resultado != null)
+                if (response.IsSuccessStatusCode && retorno != null && retorno.Resultado != null)
                 {
                     service.FormatarDados(retorno.Resultado);
-                    retorno.Successo = true;
                 }
+
+                retorno.Sucesso = response.IsSuccessStatusCode;
             }
             
-            return retorno.Resultado;
+            return retorno;
         }
 
         public static async Task<RestModelIBGE<Municipio>> GetMunicipios(string uf)
@@ -53,7 +56,7 @@ namespace ApsHgBrasilWeather.Models.Helpers
 
                 if (retorno.Resultado != null && response.StatusCode == HttpStatusCode.OK)
                 {
-                    retorno.Successo = true;
+                    retorno.Sucesso = true;
                 }
                 return retorno;
             }
