@@ -76,10 +76,18 @@ select {
     margin-top: 5rem;
 }
 
-.panel {
-    border-color: #d6d6d6;
-    margin: 1.2rem;
-}
+    #accordion h2 {
+        margin-bottom: 2rem;
+        font-size: 1.9rem;
+        font-weight: 800;
+        color: #9E9E9E;
+    }
+
+
+    .panel {
+        border-color: #d6d6d6;
+        margin: 1.2rem;
+    }
 
     .panel .panel-heading {
         background: #fafafa;
@@ -100,6 +108,28 @@ select {
     .panel .panel-dia-semana-content{
         padding: 1.3rem;
     }
+
+#accordion a {
+    display: block;
+    text-decoration: none;
+    color: black;
+}
+
+#accordion .accordion-toggle::after {
+    color: #aaa;
+    content: "\f146";
+    display: block;
+    font-family: FontAwesome;
+    font-size: 10px;
+    line-height: 36px;
+    position: absolute;
+    top: 3px;
+    right: 15px;
+}
+
+#accordion .accordion-toggle.collapsed::after {
+    content: "\f0fe";
+}
 
     @media (max-width: 992px) {
         select {
