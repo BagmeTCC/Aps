@@ -31,6 +31,10 @@ namespace ApsHgBrasilWeather.Models.Services
                     p.MinimaTemperatura += " °C";
                     p.MaximaTemperatura += " °C";
                 });
+
+            previsaoTempoAtual.ListaPrevisaoTempoOutrosDias =
+                previsaoTempoAtual.ListaPrevisaoTempoOutrosDias?.Count >= 7 ?
+            previsaoTempoAtual.ListaPrevisaoTempoOutrosDias?.Take(7).ToList() : previsaoTempoAtual.ListaPrevisaoTempoOutrosDias;
         }
 
         public string MontarParametros(string estadoEscolhido, string municipioEscolhido)

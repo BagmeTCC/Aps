@@ -1,6 +1,6 @@
 ﻿$(document).ready(function () {
 
-
+    BuildPanels();
 });
 
 function Pesquisar(urlAction) {
@@ -29,7 +29,7 @@ function Pesquisar(urlAction) {
 
                 if (retorno.OK) {
 
-                    PopulateFields(retorno.PrevisaoTempoAtual);
+                    BuildPanels(retorno.PrevisaoTempoAtual);
 
                     hideLoadingSpinner();
 
@@ -94,7 +94,24 @@ function GetMunicipios(urlAction) {
     });
 }
 
-function PopulateFields(previsaoTempoAtual) {
+function BuildPanels(previsaoTempoAtual) {
+
+    let painelPrincipal = $('#accordion');
+
+    let painel =
+        "<div class='panel'>" +
+            "<div class='panel-heading'>" +
+                "<a class='accordion-toggle collapsed' data-toggle='collapse' href='#collapseExample1' aria-expanded='false' aria-controls='collapseExample'>" +
+                    "Teste1"+
+                "</a>"+
+            "</div>"+
+        "</div>";
+
+    let conteudo = "";
+
+
+    painelPrincipal.append(painel.concat(conteudo));
+
 
 }
 
@@ -110,8 +127,6 @@ function PopulateDropDownMunicipios(municipios) {
         ddlMunicipios.append(option);
     }
 }
-
-
 function hideLoadingSpinner() {
     $('#loading').hide();
 }

@@ -45,7 +45,8 @@ namespace ApsHgBrasilWeather.Controllers
 
             if (retorno.Sucesso)
             {
-                return Json(new { OK = retorno.Sucesso, Municipios = retorno.Resultado.OrderBy(p => p.Nome).ToList() }, JsonRequestBehavior.AllowGet);
+                return Json(new { OK = retorno.Sucesso, Municipios = retorno.Resultado
+                    .OrderBy(p => p.Nome).ToList() }, JsonRequestBehavior.AllowGet);
             }
             else
             {
