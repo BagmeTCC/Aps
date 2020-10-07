@@ -29,7 +29,7 @@ function Pesquisar(urlAction) {
 
                 if (retorno.OK) {
 
-                    BuildPanels(retorno.PrevisaoTempoAtual);
+                    BuildPanels(retorno.stringHtml);
 
                     hideLoadingSpinner();
 
@@ -98,19 +98,8 @@ function BuildPanels(previsaoTempoAtual) {
 
     let painelPrincipal = $('#accordion');
 
-    let painel =
-        "<div class='panel'>" +
-            "<div class='panel-heading'>" +
-                "<a class='accordion-toggle collapsed' data-toggle='collapse' href='#collapseExample1' aria-expanded='false' aria-controls='collapseExample'>" +
-                    "Teste1"+
-                "</a>"+
-            "</div>"+
-        "</div>";
 
-    let conteudo = "";
-
-
-    painelPrincipal.append(painel.concat(conteudo));
+    painelPrincipal.append(previsaoTempoAtual);
 
 
 }

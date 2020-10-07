@@ -1,0 +1,33 @@
+﻿@model ApsHgBrasilWeather.Lib.Models.RestModels.HgBrasil.PrevisaoTempoAtual
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+</head>
+<body>
+
+    <h2>Previsão do Tempo</h2>
+
+    @foreach (var previsao in Model.ListaPrevisaoTempoOutrosDias)
+    {
+        <div class="panel">
+            <div class="panel-heading">
+                <a class="accordion-toggle collapsed" data-toggle="collapse" href="#@previsao.DiaSemana" aria-expanded="false" aria-controls="collapseExample">
+                    @previsao.DiaSemana
+                </a>
+            </div>
+
+            <div class="collapse" id="@previsao.DiaSemana">
+                <div class="panel-dia-semana-content">
+                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+                </div>
+            </div>
+        </div>
+    }
+
+</body>
+</html>

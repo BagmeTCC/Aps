@@ -1,8 +1,9 @@
-﻿using ApsHgBrasilWeather.Models.Helpers;
-using ApsHgBrasilWeather.Models.RestModels;
-using ApsHgBrasilWeather.Models.RestModels.HgBrasil;
-using ApsHgBrasilWeather.Models.Services;
-using ApsHgBrasilWeather.Models.ViewModels;
+﻿
+using ApsHgBrasilWeather.Lib.Helpers;
+using ApsHgBrasilWeather.Lib.Models.RestModels.HgBrasil;
+using ApsHgBrasilWeather.Lib.Models.ViewModels;
+using ApsHgBrasilWeather.Lib.Services;
+using ApsHgBrasilWeather.Lib.Util;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -17,6 +18,7 @@ namespace ApsHgBrasilWeather.Controllers
     {
         public ActionResult Index()
         {
+            
             PrevisaoTempoViewModel viewModel = new PrevisaoTempoViewModel();
 
             return View(viewModel);
@@ -31,16 +33,20 @@ namespace ApsHgBrasilWeather.Controllers
 
             if (retorno.Sucesso)
             {
-                return Json(new { OK = retorno.Sucesso, PrevisaoTempoAtual = retorno.Resultado }, JsonRequestBehavior.AllowGet);
+                string painel = RazorUtil.ConverterTemplate(retorno.Resultado);
+
+                return Json(new { OK = retorno.Sucesso, stringHtml = painel }, JsonRequestBehavior.AllowGet);
             }
             else
             {
-                return Json(new { OK = false, Mensagem = retorno.Mensagem}, JsonRequestBehavior.AllowGet);
+                return Json(new { OK = false, Mensagem = retorno.Mensagem, }, JsonRequestBehavior.AllowGet);
             }
         }
 
         public async Task<ActionResult> GetMunicipios(string estadoEscolhido)
         {
+            
+
             var retorno = await ApiHelper.GetMunicipios(estadoEscolhido);
 
             if (retorno.Sucesso)

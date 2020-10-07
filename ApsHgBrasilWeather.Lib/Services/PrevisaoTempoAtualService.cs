@@ -1,13 +1,13 @@
-﻿using ApsHgBrasilWeather.Models.Helpers;
-using ApsHgBrasilWeather.Models.RestModels;
-using ApsHgBrasilWeather.Models.RestModels.HgBrasil;
+﻿using ApsHgBrasilWeather.Lib.Helpers;
+using ApsHgBrasilWeather.Lib.Models.RestModels.HgBrasil;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
-namespace ApsHgBrasilWeather.Models.Services
+namespace ApsHgBrasilWeather.Lib.Services
 {
     public class PrevisaoTempoAtualService
     {
@@ -15,17 +15,17 @@ namespace ApsHgBrasilWeather.Models.Services
         {
             CultureInfo culture = new CultureInfo("pt-BR");
 
-            previsaoTempoAtual.HorarioNascerSol = 
+            previsaoTempoAtual.HorarioNascerSol =
                 Convert.ToDateTime(previsaoTempoAtual.HorarioNascerSol, culture).ToString("HH:mm");
-            previsaoTempoAtual.HorarioPorSol = 
+            previsaoTempoAtual.HorarioPorSol =
                 Convert.ToDateTime(previsaoTempoAtual.HorarioPorSol, culture).ToString("HH:mm"); ;
             previsaoTempoAtual.CondicaoTempoAtual = GetDescricaoCondicaoTempo(previsaoTempoAtual.CondicaoTempoAtual);
             previsaoTempoAtual.TemperaturaAtual += " °C";
-            previsaoTempoAtual.UmidadePercentual += "%"; 
+            previsaoTempoAtual.UmidadePercentual += "%";
             previsaoTempoAtual.Uf = previsaoTempoAtual.CidadeUf.Split(',')[1].Trim();
 
             previsaoTempoAtual.ListaPrevisaoTempoOutrosDias?
-                .ForEach(p => 
+                .ForEach(p =>
                 {
                     p.CondicaoTempo = GetDescricaoCondicaoTempo(p.CondicaoTempo);
                     p.MinimaTemperatura += " °C";
@@ -65,7 +65,7 @@ namespace ApsHgBrasilWeather.Models.Services
             }
 
             return parametros.ToString();
-            
+
         }
 
         private string GetDescricaoCondicaoTempo(string condicaoTempoAtual)

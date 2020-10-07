@@ -1,7 +1,6 @@
-﻿using ApsHgBrasilWeather.Models.RestModels;
-using ApsHgBrasilWeather.Models.RestModels.HgBrasil;
-using ApsHgBrasilWeather.Models.RestModels.IBGE;
-using ApsHgBrasilWeather.Models.Services;
+﻿using ApsHgBrasilWeather.Lib.Models.RestModels.HgBrasil;
+using ApsHgBrasilWeather.Lib.Models.RestModels.IBGE;
+using ApsHgBrasilWeather.Lib.Services;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -9,9 +8,10 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
 
-namespace ApsHgBrasilWeather.Models.Helpers
+namespace ApsHgBrasilWeather.Lib.Helpers
 {
     public class ApiHelper
     {
@@ -25,7 +25,7 @@ namespace ApsHgBrasilWeather.Models.Helpers
             string url = ConfigHelper.UrlWeather + parametros;
 
             HttpResponseMessage response = await client.GetAsync(url);
-            
+
             using (var responseStream = await response.Content.ReadAsStreamAsync())
             {
                 string stringJson = new StreamReader(responseStream).ReadToEnd();
@@ -38,7 +38,7 @@ namespace ApsHgBrasilWeather.Models.Helpers
 
                 retorno.Sucesso = response.IsSuccessStatusCode;
             }
-            
+
             return retorno;
         }
 
