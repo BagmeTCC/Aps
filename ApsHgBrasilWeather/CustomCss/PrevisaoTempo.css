@@ -37,11 +37,12 @@ h2 {
 
 input[type=text] {
     border: #dddddd 2px solid !important;
-    max-width: 100%;
+    max-width: 100% !important;
+    width: 100% !important;
     border-radius: 5px !important;
     background: #9E9E9E !important;
     color: #fff !important;
-    padding: 20px !important;
+    padding: 12px 15px !important;
 }
 
 select {
@@ -69,11 +70,17 @@ select {
     box-shadow: none !important;
 }
 
-#accordion {
+.form-group{
+    margin-left: -60px !important;
+    margin-right: 0 !important;
+}
+
+#accordion, previsao-tempo-atual {
     border: 1px solid #d6d6d6;
     padding: 1.2rem;
     box-shadow: 2px 2px 7px;
     margin-top: 5rem;
+    display: none;
 }
 
     #accordion h2 {

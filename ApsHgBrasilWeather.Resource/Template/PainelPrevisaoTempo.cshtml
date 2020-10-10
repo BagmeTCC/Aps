@@ -10,20 +10,64 @@
 </head>
 <body>
 
-    <h2>Previsão do Tempo</h2>
+    <h2>Previsão do Tempo Atual</h2>
+
+    <div class="form-group">
+        <label class="control-label col-md-2" for="@Model.CidadeUf">@Model.CidadeUf</label>
+        <div class="col-md-10">
+            <input type="text" name="@Model.CidadeUf" value="@Model.CidadeUf" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-2" for="@Model.CidadeUf">@Model.CidadeUf</label>
+        <div class="col-md-10">
+            <input type="text" name="@Model.CidadeUf" value="@Model.CidadeUf" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-2" for="@Model.CidadeUf">@Model.CidadeUf</label>
+        <div class="col-md-10">
+            <input type="text" name="@Model.CidadeUf" value="@Model.CidadeUf" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-2" for="@Model.CidadeUf">@Model.CidadeUf</label>
+        <div class="col-md-10">
+            <input type="text" name="@Model.CidadeUf" value="@Model.CidadeUf" />
+        </div>
+    </div>
+
+    <hr />
+
+    <h2>Previsão do Tempo dos Dias Seguintes</h2>
 
     @foreach (var previsao in Model.ListaPrevisaoTempoOutrosDias)
     {
+
+
         <div class="panel">
             <div class="panel-heading">
                 <a class="accordion-toggle collapsed" data-toggle="collapse" href="#@previsao.DiaSemana" aria-expanded="false" aria-controls="collapseExample">
-                    @previsao.DiaSemana
+                    <p style="font-weight: bold">@previsao.DiaSemana - @previsao.DataPrevisao</p>
                 </a>
             </div>
 
             <div class="collapse" id="@previsao.DiaSemana">
                 <div class="panel-dia-semana-content">
-                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+
+                    <img src="~/Images/@previsao.NomeImagemCondicaoTempo"/>
+
+                    <label for="@previsao.CondicaoTempo">Condição do Tempo: </label>
+                    <input type="text" value="@previsao.CondicaoTempo" />
+
+                    <label for="@previsao.MinimaTemperatura">Temperatura Mínima: </label>
+                    <input type="text" value="@previsao.MinimaTemperatura" />
+
+                    <label for="@previsao.MaximaTemperatura">Temperatura Máxima: </label>
+                    <input type="text" value="@previsao.MaximaTemperatura" />
                 </div>
             </div>
         </div>

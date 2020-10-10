@@ -18,7 +18,6 @@ namespace ApsHgBrasilWeather.Controllers
     {
         public ActionResult Index()
         {
-            
             PrevisaoTempoViewModel viewModel = new PrevisaoTempoViewModel();
 
             return View(viewModel);
@@ -33,7 +32,7 @@ namespace ApsHgBrasilWeather.Controllers
 
             if (retorno.Sucesso)
             {
-                string painel = RazorUtil.ConverterTemplate(retorno.Resultado);
+                string painel = RazorUtil.GetTemplate(retorno.Resultado);
 
                 return Json(new { OK = retorno.Sucesso, stringHtml = painel }, JsonRequestBehavior.AllowGet);
             }
@@ -45,8 +44,6 @@ namespace ApsHgBrasilWeather.Controllers
 
         public async Task<ActionResult> GetMunicipios(string estadoEscolhido)
         {
-            
-
             var retorno = await ApiHelper.GetMunicipios(estadoEscolhido);
 
             if (retorno.Sucesso)

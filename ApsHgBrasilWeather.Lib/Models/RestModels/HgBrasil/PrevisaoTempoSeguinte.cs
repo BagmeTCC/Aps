@@ -26,5 +26,7 @@ namespace ApsHgBrasilWeather.Lib.Models.RestModels.HgBrasil
 
         [JsonProperty(PropertyName = "Condition")]
         public string CondicaoTempo { get; set; }
+
+        public string NomeImagemCondicaoTempo { get; set; }
     }
 }

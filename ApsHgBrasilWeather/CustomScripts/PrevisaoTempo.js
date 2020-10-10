@@ -1,9 +1,4 @@
-﻿$(document).ready(function () {
-
-    BuildPanels();
-});
-
-function Pesquisar(urlAction) {
+﻿function Pesquisar(urlAction) {
 
     let estadoEscolhido = $('#ddlEstados').val();
     let municipioEscolhido = $('#ddlMunicipios').val();
@@ -30,23 +25,27 @@ function Pesquisar(urlAction) {
                 if (retorno.OK) {
 
                     BuildPanels(retorno.stringHtml);
-
                     hideLoadingSpinner();
+                    showPainel();
+
 
                 } else {
 
-                    alert(retorno.Mensagem);
-
                     hideLoadingSpinner();
+                    hidePainel();
+                    alert(retorno.Mensagem);
+                    
+
                 }
             },
 
             error: function (retorno) {
+
+                hideLoadingSpinner();
+                hidePainel();
                 alert('Ocorreu um erro ao pesquisar o tempo do município escolhido. ' +
                     'Tente mais uma vez e se o erro persistir contate o administrador.' +
                     retorno);
-
-                hideLoadingSpinner();
             }
         });
     }
@@ -64,6 +63,7 @@ function GetMunicipios(urlAction) {
 
         beforeSend: function () {
             showLoadingSpinner();
+            $('#accordion').hide();
         },
 
         success: function (retorno) {
@@ -71,25 +71,23 @@ function GetMunicipios(urlAction) {
             if (retorno.OK) {
 
                 PopulateDropDownMunicipios(retorno.Municipios);
-
                 hideLoadingSpinner();
 
             } else {
 
+                hideLoadingSpinner();
                 alert('Oops! Ocorreu um erro ao buscar os municípios do estado selecionado. ' +
                     'Tente novamente.' +
                     retorno);
-
-                hideLoadingSpinner();
             }
         },
 
         error: function (retorno) {
+
+            hideLoadingSpinner();
             alert('Oops! Ocorreu um erro ao buscar os municípios do estado selecionado. ' +
                 'Tente novamente.' +
                 retorno);
-
-            hideLoadingSpinner();
         }
     });
 }
@@ -97,11 +95,8 @@ function GetMunicipios(urlAction) {
 function BuildPanels(previsaoTempoAtual) {
 
     let painelPrincipal = $('#accordion');
-
-
+    painelPrincipal.empty();
     painelPrincipal.append(previsaoTempoAtual);
-
-
 }
 
 function PopulateDropDownMunicipios(municipios) {
@@ -123,3 +118,13 @@ function hideLoadingSpinner() {
 function showLoadingSpinner() {
     $('#loading').show();
 }
+
+function showPainel() {
+    $('#accordion').show();
+}
+
+function hidePainel() {
+    $('#accordion').hide();
+    $('#accordion').empty();
+}
+

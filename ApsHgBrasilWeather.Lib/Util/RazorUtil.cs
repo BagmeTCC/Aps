@@ -11,18 +11,27 @@ namespace ApsHgBrasilWeather.Lib.Util
 {
     public class RazorUtil
     {
-        public static string ConverterTemplate<T>(T model)
+        public static string GetTemplate<T>(T model)
         {
-            string path = AppDomain.CurrentDomain.BaseDirectory + "bin\\Template\\";
-            string file = "PainelPrevisaoTempo.cshtml";
+            try
+            {
+                string path = AppDomain.CurrentDomain.BaseDirectory + "bin\\Template\\";
+                string file = "PainelPrevisaoTempo.cshtml";
 
+                string template = File.ReadAllText(path + file);
 
-            string template = File.ReadAllText(path + file);
+                string stringHtml = Engine.Razor.RunCompile(new LoadedTemplateSource(template),
+                   "", typeof(T), model);
 
-            string b = Engine.Razor.RunCompile(new LoadedTemplateSource(template),
-               "", typeof(T), model);
+                return stringHtml;
+            }
+            catch (Exception ex)
+            {
 
-            return b;
+                return ex.Message;
+            }
+
+            
         }
     }
 }

@@ -140,7 +140,17 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\clear-day.png" />
+    <Content Include="Images\clear-night.png" />
+    <Content Include="Images\cloud.png" />
+    <Content Include="Images\cloudly-day.png" />
+    <Content Include="Images\cloudly-night.png" />
+    <Content Include="Images\fog.png" />
+    <Content Include="Images\hail.png" />
     <Content Include="Images\loading.gif" />
+    <Content Include="Images\raining.png" />
+    <Content Include="Images\snow.png" />
+    <Content Include="Images\storm.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="fonts\FontAwesome.otf" />

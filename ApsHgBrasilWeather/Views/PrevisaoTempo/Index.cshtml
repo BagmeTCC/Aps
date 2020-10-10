@@ -4,28 +4,29 @@
 {
     @Html.AntiForgeryToken()
 
-    <div class="form-horizontal">
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.EstadoSelecionado, htmlAttributes: new { @class = "control-label col-md-1 campoObrigatorio" })
-            <div class="col-md-4">
-                @Html.DropDownListFor(model => Model.EstadoSelecionado, Model.Estados, new { @id = "ddlEstados", @class = "form-control", @onchange = $"GetMunicipios('{Url.Action("GetMunicipios", "PrevisaoTempo")}')" })
-                @Html.ValidationMessageFor(model => model.EstadoSelecionado, "", new { @class = "text-danger" })
-            </div>
+<div class="form-horizontal">
 
-            @Html.LabelFor(model => model.MunicipioSelecionado, htmlAttributes: new { @class = "control-label col-md-1 campoObrigatorio" })
-            <div class="col-md-4">
-                @Html.DropDownListFor(model => Model.MunicipioSelecionado, Model.Municipios, new { @id = "ddlMunicipios", @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.MunicipioSelecionado, "", new { @class = "text-danger" })
-            </div>
-
-            <div class="col-md-1">
-                <i class="fa fa-search fa-2x btnPesquisar" onclick="Pesquisar('@Url.Action("GetPrevisaoTempo", "PrevisaoTempo")')"></i>
-            </div>
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.LabelFor(model => model.EstadoSelecionado, htmlAttributes: new { @class = "control-label col-md-1 campoObrigatorio" })
+        <div class="col-md-4">
+            @Html.DropDownListFor(model => Model.EstadoSelecionado, Model.Estados, new { @id = "ddlEstados", @class = "form-control", @onchange = $"GetMunicipios('{Url.Action("GetMunicipios", "PrevisaoTempo")}')" })
+            @Html.ValidationMessageFor(model => model.EstadoSelecionado, "", new { @class = "text-danger" })
         </div>
 
-        <div id="accordion">
+        @Html.LabelFor(model => model.MunicipioSelecionado, htmlAttributes: new { @class = "control-label col-md-1 campoObrigatorio" })
+        <div class="col-md-4">
+            @Html.DropDownListFor(model => Model.MunicipioSelecionado, Model.Municipios, new { @id = "ddlMunicipios", @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.MunicipioSelecionado, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="col-md-1">
+            <i class="fa fa-search fa-2x btnPesquisar" onclick="Pesquisar('@Url.Action("GetPrevisaoTempo", "PrevisaoTempo")')"></i>
         </div>
     </div>
+
+    <div id="accordion">
+    </div>
+</div>
 
 }

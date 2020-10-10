@@ -44,6 +44,8 @@ namespace ApsHgBrasilWeather.Lib.Models.RestModels.HgBrasil
 
         public string Uf { get; set; }
 
+        public string NomeImagemCondicaoTempo { get; set; }
+
         [JsonProperty(PropertyName = "Forecast")]
         public List<PrevisaoTempoSeguinte> ListaPrevisaoTempoOutrosDias { get; set; }
     }

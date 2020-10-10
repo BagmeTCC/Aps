@@ -19,22 +19,29 @@ namespace ApsHgBrasilWeather.Lib.Services
                 Convert.ToDateTime(previsaoTempoAtual.HorarioNascerSol, culture).ToString("HH:mm");
             previsaoTempoAtual.HorarioPorSol =
                 Convert.ToDateTime(previsaoTempoAtual.HorarioPorSol, culture).ToString("HH:mm"); ;
-            previsaoTempoAtual.CondicaoTempoAtual = GetDescricaoCondicaoTempo(previsaoTempoAtual.CondicaoTempoAtual);
             previsaoTempoAtual.TemperaturaAtual += " °C";
             previsaoTempoAtual.UmidadePercentual += "%";
             previsaoTempoAtual.Uf = previsaoTempoAtual.CidadeUf.Split(',')[1].Trim();
+            previsaoTempoAtual.NomeImagemCondicaoTempo = GetNomeImagemPorCondicaoTempo(previsaoTempoAtual.CondicaoTempoAtual);
 
             previsaoTempoAtual.ListaPrevisaoTempoOutrosDias?
                 .ForEach(p =>
                 {
-                    p.CondicaoTempo = GetDescricaoCondicaoTempo(p.CondicaoTempo);
                     p.MinimaTemperatura += " °C";
                     p.MaximaTemperatura += " °C";
+                    p.NomeImagemCondicaoTempo = GetNomeImagemPorCondicaoTempo(p.CondicaoTempo);
+                    p.CondicaoTempo = GetDescricaoCondicaoTempo(p.CondicaoTempo);
                 });
+
+            previsaoTempoAtual.CondicaoTempoAtual = GetDescricaoCondicaoTempo(previsaoTempoAtual.CondicaoTempoAtual);
 
             previsaoTempoAtual.ListaPrevisaoTempoOutrosDias =
                 previsaoTempoAtual.ListaPrevisaoTempoOutrosDias?.Count >= 7 ?
             previsaoTempoAtual.ListaPrevisaoTempoOutrosDias?.Take(7).ToList() : previsaoTempoAtual.ListaPrevisaoTempoOutrosDias;
+
+            string dataConsultaFormatada = Convert.ToDateTime(previsaoTempoAtual.DataConsulta).ToString("dd/MM");
+            previsaoTempoAtual.ListaPrevisaoTempoOutrosDias = previsaoTempoAtual.ListaPrevisaoTempoOutrosDias
+                .Where(p => p.DataPrevisao != dataConsultaFormatada).ToList();
         }
 
         public string MontarParametros(string estadoEscolhido, string municipioEscolhido)
@@ -120,6 +127,56 @@ namespace ApsHgBrasilWeather.Lib.Services
 
                 case "none_night":
                     desc = "Erro ao obter mas está de noite";
+                    break;
+            }
+
+            return desc;
+        }
+
+        private string GetNomeImagemPorCondicaoTempo(string condicaoTempoAtual)
+        {
+            string desc = "";
+
+            switch (condicaoTempoAtual)
+            {
+                case "storm":
+                    desc = "storm.png";
+                    break;
+
+                case "snow":
+                    desc = "snow.png";
+                    break;
+
+                case "hail":
+                    desc = "hail.png";
+                    break;
+
+                case "rain":
+                    desc = "raining.png";
+                    break;
+
+                case "fog":
+                    desc = "fog.png";
+                    break;
+
+                case "clear_day":
+                    desc = "clear-day.png";
+                    break;
+
+                case "clear_night":
+                    desc = "clear-night.png";
+                    break;
+
+                case "cloud":
+                    desc = "cloud.png";
+                    break;
+
+                case "cloudly_day":
+                    desc = "cloudly-day.png";
+                    break;
+
+                case "cloudly_night":
+                    desc = "cloudly-night.png";
                     break;
             }
 
