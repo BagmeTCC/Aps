@@ -10,33 +10,49 @@
 </head>
 <body>
 
-    <h2>Previsão do Tempo Atual</h2>
-
-    <div class="form-group">
-        <label class="control-label col-md-2" for="@Model.CidadeUf">@Model.CidadeUf</label>
-        <div class="col-md-10">
-            <input type="text" name="@Model.CidadeUf" value="@Model.CidadeUf" />
+    <div class="previsao-tempo-atual-container">
+        <div class="data-consulta">
+            <p><small>Consultado em: @Model.DataConsulta - @Model.HoraConsulta</small></p>
         </div>
-    </div>
+        <br />
+        <h2>Previsão do Tempo Atual</h2>
 
-    <div class="form-group">
-        <label class="control-label col-md-2" for="@Model.CidadeUf">@Model.CidadeUf</label>
-        <div class="col-md-10">
-            <input type="text" name="@Model.CidadeUf" value="@Model.CidadeUf" />
-        </div>
-    </div>
+        <div class="form-group">
+            <div class="col-md-4">
+                <label>Nascer do Sol: </label>
+                <input type="text" value="@Model.HorarioNascerSol" />
+            </div>
 
-    <div class="form-group">
-        <label class="control-label col-md-2" for="@Model.CidadeUf">@Model.CidadeUf</label>
-        <div class="col-md-10">
-            <input type="text" name="@Model.CidadeUf" value="@Model.CidadeUf" />
-        </div>
-    </div>
+            <div class="col-md-4">
+                <label>Pôr do Sol: </label>
+                <input type="text" value="@Model.HorarioPorSol" />
+            </div>
 
-    <div class="form-group">
-        <label class="control-label col-md-2" for="@Model.CidadeUf">@Model.CidadeUf</label>
-        <div class="col-md-10">
-            <input type="text" name="@Model.CidadeUf" value="@Model.CidadeUf" />
+            <div class="col-md-4">
+                <label>Velocidade do Vento: </label>
+                <input type="text" value="@Model.VelocidadeVento" />
+            </div>
+
+            <div class="col-md-12">
+                <div class="dados-principais">
+                    <div class="col-md-6 umidade-do-ar">
+                        <figure>
+                            <img src="~/Images/traffic-lights.png" />
+                            <figcaption><label>Umidade Relativa do Ar: @Model.UmidadePercentual</label></figcaption>
+                        </figure>
+                    </div>
+
+                    <div class="col-md-6 temperatura-atual">
+                        <figure>
+                            <img src="~/Images/@Model.NomeImagemCondicaoTempo" />
+                            <figcaption>
+                                <h4>@Model.CondicaoTempoAtual</h4>
+                                <label>Temperatual Atual: @Model.TemperaturaAtual</label>
+                            </figcaption>
+                        </figure>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -46,8 +62,6 @@
 
     @foreach (var previsao in Model.ListaPrevisaoTempoOutrosDias)
     {
-
-
         <div class="panel">
             <div class="panel-heading">
                 <a class="accordion-toggle collapsed" data-toggle="collapse" href="#@previsao.DiaSemana" aria-expanded="false" aria-controls="collapseExample">
@@ -56,18 +70,16 @@
             </div>
 
             <div class="collapse" id="@previsao.DiaSemana">
-                <div class="panel-dia-semana-content">
+                <div class="panel-dia-semana">
+                    <div class="card-condicao-tempo">
+                        <img src="~/Images/@previsao.NomeImagemCondicaoTempo" />
+                        <h4>@previsao.CondicaoTempo</h4>
 
-                    <img src="~/Images/@previsao.NomeImagemCondicaoTempo"/>
-
-                    <label for="@previsao.CondicaoTempo">Condição do Tempo: </label>
-                    <input type="text" value="@previsao.CondicaoTempo" />
-
-                    <label for="@previsao.MinimaTemperatura">Temperatura Mínima: </label>
-                    <input type="text" value="@previsao.MinimaTemperatura" />
-
-                    <label for="@previsao.MaximaTemperatura">Temperatura Máxima: </label>
-                    <input type="text" value="@previsao.MaximaTemperatura" />
+                        <div class="info-temperatura">
+                            <label>Min: @previsao.MinimaTemperatura</label>
+                            <label>Máx: @previsao.MaximaTemperatura</label>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

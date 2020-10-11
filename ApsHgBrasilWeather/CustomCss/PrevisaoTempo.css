@@ -70,12 +70,29 @@ select {
     box-shadow: none !important;
 }
 
-.form-group{
-    margin-left: -60px !important;
-    margin-right: 0 !important;
+.dados-principais{
+    text-align: center;
 }
 
-#accordion, previsao-tempo-atual {
+    .dados-principais .umidade-do-ar, .dados-principais .temperatura-atual {
+        margin: 2rem 0;
+    }
+
+    .dados-principais  {
+        box-shadow: 2px 2px 7px;
+    }
+
+.previsao-tempo-atual-container{
+    position: relative;
+}
+
+.data-consulta p{
+    position: absolute;
+    top: 0;
+    right: 2rem;
+}
+
+#accordion {
     border: 1px solid #d6d6d6;
     padding: 1.2rem;
     box-shadow: 2px 2px 7px;
@@ -91,10 +108,10 @@ select {
     }
 
 
-    .panel {
-        border-color: #d6d6d6;
-        margin: 1.2rem;
-    }
+.panel {
+    border-color: #d6d6d6;
+    margin: 1.2rem;
+}
 
     .panel .panel-heading {
         background: #fafafa;
@@ -107,14 +124,16 @@ select {
         cursor: pointer;
     }
 
-    .panel .panel-heading:hover {
-        box-shadow: 2px 2px 2px rgba(0,0,0, 0.3);
-        transition: 2s ease;
+        .panel .panel-heading:hover {
+            box-shadow: 2px 2px 2px rgba(0,0,0, 0.3);
+            transition: 2s ease;
+        }
+
+    .panel .panel-dia-semana {
+        padding: 1.3rem;
+        text-align: center;
     }
 
-    .panel .panel-dia-semana-content{
-        padding: 1.3rem;
-    }
 
 #accordion a {
     display: block;
@@ -134,12 +153,25 @@ select {
     right: 15px;
 }
 
+.card-condicao-tempo {
+    box-shadow: 3px 3px 7px;
+    border-radius: 5px;
+    padding: 1.2rem 0.8rem;
+    width: 50%;
+    margin: auto;
+}
+
+.info-temperatura label {
+    margin: 0.9rem;
+}
+
+
 #accordion .accordion-toggle.collapsed::after {
     content: "\f0fe";
 }
 
-    @media (max-width: 992px) {
-        select {
+@media (max-width: 992px) {
+    select {
         max-width: 100% !important;
     }
 
@@ -147,10 +179,15 @@ select {
         margin-left: 50%;
     }
 
-        #accordion {
-            border: 1px solid #d6d6d6;
-            padding: 1.2rem;
-            box-shadow: 2px 2px 7px;
-            margin-top: 2rem;
-        }
+    #accordion {
+        border: 1px solid #d6d6d6;
+        padding: 1.2rem;
+        box-shadow: 2px 2px 7px;
+        margin-top: 2rem;
+    }
+
+    .dados-principais {
+        margin: 2rem;
+        padding: 2rem;
+    }
 }

@@ -151,6 +151,7 @@
     <Content Include="Images\raining.png" />
     <Content Include="Images\snow.png" />
     <Content Include="Images\storm.png" />
+    <Content Include="Images\traffic-lights.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="fonts\FontAwesome.otf" />
